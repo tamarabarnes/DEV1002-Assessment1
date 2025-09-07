@@ -12,6 +12,9 @@
 - The payments table has 3 foreign keys, memership_id, booking_id and customer_id. A membership can have ONE or MANY payments and a payment is linked to only ONE membership. therefore the membership and payments table is a ONE to MANY relationship. One booking can have one payment and one payment can only be associated with one booking so this is a one to one relationship. A customer can have many payments and one payment can only be associated with one customer, so this is a one to many relationship. 
 - The bookings table has 3 foreign keys customer_id, service_id and walker_id. A customer can have many bookings at a time and one booking can only be associated with one customer, so this is a one to many relationship. A service can be associated with many bookings, for example multiple customers booking in for a group dog service, and a booking can only be associated with one service, so this is a one to many relationship. A walker can be tied to many bookings, for example, if they are handling group dog walks or dog sitting sessions, and one booking is associated with one dog walker, therefore this is a one to many relationship. 
 
+# Soft Delete for customers 
+- I have chosen to implement soft deletes rather than permanently deleting customer records. This ensures that even if a customer deletes their account, their details remain in the system for any previous bookings and payment information. It also allows for the recovery of customer information if they decide to restore their account later.
+
 # ERD for Database
 ![ERD Diagram for Dog walking/services app](<DEV1002 Assessment 1 ERD.drawio.png>)
 
