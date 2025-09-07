@@ -19,3 +19,26 @@ CREATE TABLE customers (
     phone VARCHAR(15) NOT NULL,
     deleted_at TIMESTAMP DEFAULT NULL
 );
+-- inserting values into customers table
+INSERT INTO customers (first_name, last_name, dob, email, phone)
+VALUES (
+        'Jake',
+        'Simmons',
+        '1993-05-14',
+        'jacob.sim116@outlook.com',
+        '0418741861'
+    ),
+    (
+        'Rebecca',
+        'Hunter',
+        '1991-10-23',
+        'rebecca.h123@gmail.com',
+        '0451234521'
+    ),
+    (
+        'Daniella',
+        'Ferguson',
+        '1996-11-17',
+        'dani.ferg@hotmail.com',
+        '0490909090'
+    );
