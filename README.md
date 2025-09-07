@@ -28,3 +28,7 @@ CREATE TABLE services (
     price_per_hr NUMERIC(6, 2) NOT NULL
 );
 ``` 
+# inserting tables 
+- For all my tables, I did not insert values for the ID columns because they are auto-populated by PostgreSQL using SERIAL.
+
+- For the deleted_at column in the customers table, it is set to DEFAULT NULL, so I did not insert any values. This is because all customers added are active, and NULL indicates that the customer has not been deleted.
