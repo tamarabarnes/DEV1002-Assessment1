@@ -16,7 +16,7 @@ CREATE TABLE customers (
     last_name VARCHAR(100) NOT NULL,
     dob DATE NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    phone VARCHAR(15) NOT NULL,
+    phone VARCHAR(15) NOT NULL UNIQUE,
     deleted_at TIMESTAMP DEFAULT NULL
 );
 -- inserting values into customers table
@@ -42,3 +42,11 @@ VALUES (
         'dani.ferg@hotmail.com',
         '0490909090'
     );
+-- Creating dog walker table 
+CREATE TABLE dog_walker (
+    walker_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(15) NOT NULL UNIQUE
+);
