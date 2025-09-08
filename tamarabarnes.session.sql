@@ -110,6 +110,20 @@ VALUES (
         '2025-04-15',
         '2026-04-15'
     );
+-- Creating bookings table
+CREATE TABLE bookings (
+    booking_id SERIAL PRIMARY KEY,
+    booking_type VARCHAR(100) NOT NULL,
+    booking_date DATE NOT NULL,
+    booking_time TIME NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    customer_id INTEGER NOT NULL,
+    service_id INTEGER NOT NULL,
+    walker_id INTEGER NOT NULL,
+    FOREIGN KEY customer_id REFERENCES customers(customer_id) ON DELETE RESTRICT,
+    FOREIGN KEY service_id REFERENCES services(service_id) ON DELETE RESTRICT,
+    FOREIGN KEY walker_id REFERENCES dog_walker(walker_id) ON DELETE RESTRICT
+);
 -- Creating payments table 
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
