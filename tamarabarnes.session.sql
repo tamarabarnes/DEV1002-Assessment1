@@ -74,9 +74,52 @@ VALUES (
 -- Adding memberships table
 CREATE TABLE memberships (
     membership_id SERIAL PRIMARY KEY,
+    customer_id INTEGER NOT NULL,
+    plan_type VARCHAR(50) NOT NULL,
     account_name VARCHAR(100) NOT NULL,
     active_date DATE NOT NULL,
     expiry_date DATE NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT
+);
+-- inserting values into memberships table
+INSERT INTO memberships (
+        customer_id,
+        plan_type,
+        account_name,
+        active_date,
+        expiry_date
+    )
+VALUES (
+        1,
+        'Monthly',
+        'j.simmons',
+        '2025-08-28',
+        '2025-09-28'
+    ),
+    (
+        2,
+        'Yearly',
+        'r.hunter',
+        '2024-10-20',
+        '2025-10-20'
+    ),
+    (
+        3,
+        'Yearly',
+        'd.ferguson',
+        '2025-04-15',
+        '2026-04-15'
+    );
+-- Creating payments table 
+CREATE TABLE payments (
+    payment_id SERIAL PRIMARY KEY,
+    payment_date DATE NOT NULL,
+    amount_paid NUMERIC(6, 2) NOT NULL,
+    payment_type VARCHAR(20) NOT NULL CHECK (payment_type IN ('membership', 'booking')),
+    membership_id INTEGER DEFAULT NULL,
+    booking_id INTEGER DEFAULT NULL,
     customer_id INTEGER NOT NULL,
+    FOREIGN KEY (membership_id) REFERENCES memberships(membership_id) ON DELETE RESTRICT,
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE RESTRICT,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT
 );
