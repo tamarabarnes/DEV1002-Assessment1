@@ -15,6 +15,9 @@
 # Soft Delete for customers 
 - I have chosen to implement soft deletes rather than permanently deleting customer records. This ensures that even if a customer deletes their account, their details remain in the system for any previous bookings and payment information. It also allows for the recovery of customer information if they decide to restore their account later.
 
+# Constraints for foreign keys
+For the foreign keys in the memberships, payments, and bookings tables, I have set the constraint as ON DELETE RESTRICT. This ensures that related records cannot be removed if someone accidentally attempts a hard delete on a parent record. This aligns with the use of soft deletes (deleted_at), since historical data (such as bookings and payments) should always be preserved.
+
 # ERD for Database
 ![ERD Diagram for Dog walking/services app](<DEV1002 Assessment 1 ERD.drawio.png>)
 
