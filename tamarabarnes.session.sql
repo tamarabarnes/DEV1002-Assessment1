@@ -71,3 +71,12 @@ VALUES (
         'felton.tom@hotmail.com',
         '0477889911'
     );
+-- Adding memberships table
+CREATE TABLE memberships (
+    membership_id SERIAL PRIMARY KEY,
+    account_name VARCHAR(100) NOT NULL,
+    active_date DATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    customer_id INTEGER NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT
+);

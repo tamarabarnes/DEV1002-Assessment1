@@ -18,6 +18,18 @@
 # Constraints for foreign keys
 For the foreign keys in the memberships, payments, and bookings tables, I have set the constraint as ON DELETE RESTRICT. This ensures that related records cannot be removed if someone accidentally attempts a hard delete on a parent record. This aligns with the use of soft deletes (deleted_at), since historical data (such as bookings and payments) should always be preserved.
 
+## example of constraint added on foreign key 
+``` sql
+CREATE TABLE memberships (
+    membership_id SERIAL PRIMARY KEY,
+    account_name VARCHAR(100) NOT NULL,
+    active_date DATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    customer_id INTEGER NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT
+);
+```
+
 # ERD for Database
 ![ERD Diagram for Dog walking/services app](<DEV1002 Assessment 1 ERD.drawio.png>)
 
