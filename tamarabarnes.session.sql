@@ -48,5 +48,26 @@ CREATE TABLE dog_walker (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    phone VARCHAR(15) NOT NULL UNIQUE
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    deleted_at TIMESTAMP DEFAULT NULL
 );
+-- inserting values into dog_walker table
+INSERT INTO dog_walker (first_name, last_name, email, phone)
+VALUES (
+        'Rupert',
+        'Grint',
+        'rupert.grint123@gmail.com',
+        '0411223344'
+    ),
+    (
+        'Daniel',
+        'Radcliffe',
+        'dan.radcliffe@outlook.com',
+        '0433445566'
+    ),
+    (
+        'Tom',
+        'Felton',
+        'felton.tom@hotmail.com',
+        '0477889911'
+    );
