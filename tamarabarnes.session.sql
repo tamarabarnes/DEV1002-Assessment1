@@ -124,6 +124,43 @@ CREATE TABLE bookings (
     FOREIGN KEY (service_id) REFERENCES services(service_id) ON DELETE RESTRICT,
     FOREIGN KEY (walker_id) REFERENCES dog_walker(walker_id) ON DELETE RESTRICT
 );
+-- inserting values into bookings table
+INSERT INTO bookings (
+        booking_type,
+        booking_date,
+        booking_time,
+        status,
+        customer_id,
+        service_id,
+        walker_id
+    )
+VALUES (
+        'Dog Walking Group',
+        '2025-11-15',
+        '17:00',
+        'confirmed',
+        3,
+        2,
+        1
+    ),
+    (
+        'Dog Walking Private',
+        '2025-11-13',
+        '13:30',
+        'awaiting',
+        2,
+        1,
+        2
+    ),
+    (
+        'Dog Sitting',
+        '2025-11-21',
+        '16:45',
+        'confirmed',
+        1,
+        3,
+        3
+    );
 -- Creating payments table 
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
@@ -137,3 +174,15 @@ CREATE TABLE payments (
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE RESTRICT,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT
 );
+-- inserting data into payments table
+INSERT INTO payments (
+        payment_date,
+        amount_paid,
+        payment_type,
+        membership_id,
+        booking_id,
+        customer_id
+    )
+VALUES ('2025-08-28', 75, 'membership', 1, NULL, 1),
+    ('2024-10-20', 765, 'membership', 2, NULL, 2),
+    ('2025-11-15', 15, 'booking', NULL, 1, 3);
