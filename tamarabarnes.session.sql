@@ -186,3 +186,22 @@ INSERT INTO payments (
 VALUES ('2025-08-28', 75, 'membership', 1, NULL, 1),
     ('2024-10-20', 765, 'membership', 2, NULL, 2),
     ('2025-11-15', 15, 'booking', NULL, 1, 3);
+-- QUERY A TABLE FOR A SINGLE RECORD
+SELECT *
+FROM payments
+WHERE payment_id = 2;
+-- INSERT A RECORD INTO A TABLE 
+INSERT INTO payments (
+        payment_date,
+        amount_paid,
+        payment_type,
+        membership_id,
+        booking_id,
+        customer_id
+    )
+VALUES ('2025-04-15', 765, 'membership', 3, NULL, 3);
+-- QUERY JOINED TABLES FOR A SINGLE RECORD
+SELECT *
+FROM memberships
+    LEFT JOIN payments ON memberships.membership_id = payments.membership_id
+WHERE memberships.membership_id = 1;

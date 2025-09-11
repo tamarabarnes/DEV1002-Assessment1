@@ -47,3 +47,13 @@ CREATE TABLE services (
 - For all my tables, I did not insert values for the ID columns because they are auto-populated by PostgreSQL using SERIAL.
 
 - For the deleted_at column in the customers table, it is set to DEFAULT NULL, so I did not insert any values. This is because all customers added are active, and NULL indicates that the customer has not been deleted.
+
+# QUERY JOINED TABLES FOR A SINGLE RECORD
+- For this requirement —> query joined tables for a single record, I chose to join the memberships and payments tables. I used a LEFT JOIN, which extracts all rows from the left table (memberships) and matches them with corresponding rows in the payments table. If there is no matching payment, the columns from the payments table will display as NULL. This ensures that I always get a record from the memberships table, regardless of whether there is corresponding data in the payments table.
+
+``` sql
+SELECT *
+FROM memberships
+    LEFT JOIN payments ON memberships.membership_id = payments.membership_id
+WHERE memberships.membership_id = 1;
+```
