@@ -57,3 +57,15 @@ FROM memberships
     LEFT JOIN payments ON memberships.membership_id = payments.membership_id
 WHERE memberships.membership_id = 1;
 ```
+# Deleting from child tables - e.g. Booking table 
+- The bookings table is a child table, with foreign keys referencing customers, services, and dog_walker.
+- Deleting a record from the bookings table only removes that booking, and all parent records remain unaffected.
+- Attempting to delete a record from a parent table (such as customers, services, or dog_walker) will fail if there are any child records in bookings that reference it, due to ON DELETE RESTRICT.
+- To delete a parent record, you must first remove all associated child records that reference it.
+-- Example: To delete a customer, you must first delete all bookings linked to that customer.
+
+``` sql 
+DELETE FROM bookings
+WHERE booking_id = 4;
+``` 
+# Deleting from parent tables - e.g. 

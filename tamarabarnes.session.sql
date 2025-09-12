@@ -205,3 +205,29 @@ SELECT *
 FROM memberships
     LEFT JOIN payments ON memberships.membership_id = payments.membership_id
 WHERE memberships.membership_id = 1;
+-- INSERT A RECORD INTO A TABLE WITH APPROPRIATE FOREIGN-KEY DATA
+INSERT INTO bookings (
+        booking_type,
+        booking_date,
+        booking_time,
+        status,
+        customer_id,
+        service_id,
+        walker_id
+    )
+VALUES (
+        'Dog Walking Group',
+        '2025-09-20',
+        '15:00',
+        'confirmed',
+        1,
+        2,
+        3
+    );
+-- UPDATE A RECORD IN A TABLE
+UPDATE customers
+SET dob = '1994-05-14'
+WHERE customer_id = 1;
+-- DELETING A RECORD FROM A TABLE 
+DELETE FROM bookings
+WHERE booking_id = 4;
