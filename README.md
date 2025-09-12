@@ -84,3 +84,18 @@ SELECT SUM(amount_paid)
 FROM payments
 WHERE customer_id = 3;
 ```
+# Filtering data based on specific value 
+- In this example, we are calculating the SUM of amount_paid for each customer_id.
+- The GROUP BY customer_id clause groups payments by customer so that we get a total per customer.
+- The filtering happens with the HAVING clause:
+``` sql 
+HAVING SUM (amount paid) > 100
+```
+- this ensures that ONLY customers whose total payments are greater than 100 are included in the results 
+``` sql 
+SELECT customer_id,
+       SUM(amount_paid) AS total_paid
+FROM payments
+GROUP BY customer_id
+HAVING SUM(amount_paid) > 100;
+```

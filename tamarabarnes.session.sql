@@ -239,3 +239,9 @@ ORDER BY first_name DESC;
 SELECT SUM(amount_paid)
 FROM payments
 WHERE customer_id = 3;
+-- FILTERING DATA ON A SPECIFIC VALUE
+SELECT customer_id,
+    SUM(amount_paid) AS total_paid
+FROM payments
+GROUP BY customer_id
+HAVING SUM(amount_paid) > 100;
