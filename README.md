@@ -68,4 +68,11 @@ WHERE memberships.membership_id = 1;
 DELETE FROM bookings
 WHERE booking_id = 4;
 ``` 
-# Deleting from parent tables - e.g. 
+# Ordering data by a specific value 
+- The ORDER BY clause allows users to display query results in a specified order.
+- In this example, the query orders the customers data by the first_name column in descending order (DESC).
+- This means names closest to the end of the alphabet (e.g., “Rebecca”) will appear first, and names closest to the beginning of the alphabet (e.g., “Daniella”) will appear last.
+``` sql 
+SELECT * FROM customers
+ORDER BY first_name DESC;
+```

@@ -231,3 +231,7 @@ WHERE customer_id = 1;
 -- DELETING A RECORD FROM A TABLE 
 DELETE FROM bookings
 WHERE booking_id = 4;
+-- ORDER DATA BY A SPECIFIC VALUE
+SELECT *
+FROM customers
+ORDER BY first_name DESC;
