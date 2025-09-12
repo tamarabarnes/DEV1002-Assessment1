@@ -235,3 +235,7 @@ WHERE booking_id = 4;
 SELECT *
 FROM customers
 ORDER BY first_name DESC;
+-- CALCULATE DATA BASED ON VALUES FROM TABLES
+SELECT SUM(amount_paid)
+FROM payments
+WHERE customer_id = 3;

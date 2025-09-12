@@ -76,3 +76,11 @@ WHERE booking_id = 4;
 SELECT * FROM customers
 ORDER BY first_name DESC;
 ```
+# Calculating data based on values from tables 
+- In this example, the aggregate function SUM() is being used to calculate a total.
+- The query sums all the values in the amount_paid column from the payments table for the customer with customer_id = 3. 
+``` sql 
+SELECT SUM(amount_paid)
+FROM payments
+WHERE customer_id = 3;
+```
