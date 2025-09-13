@@ -2,7 +2,7 @@
 CREATE TABLE services (
     service_id SERIAL PRIMARY KEY,
     service VARCHAR NOT NULL,
-    price_per_hr NUMERIC(6, 2) NOT NULL CHECK (price_per_hr > 0)
+    price_per_hr NUMERIC(6, 2) NOT NULL
 );
 -- input seed data in the service table
 INSERT INTO services (service, price_per_hr)
@@ -14,7 +14,7 @@ CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    dob DATE NOT NULL CHECK (dob <= CURRENT_DATE),
+    dob DATE NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(15) NOT NULL UNIQUE,
     deleted_at TIMESTAMP DEFAULT NULL
@@ -248,3 +248,32 @@ SELECT customer_id,
 FROM payments
 GROUP BY customer_id
 HAVING SUM(amount_paid) > 100;
+-- Adding integrity checks on services table 
+ALTER TABLE services
+ADD CONSTRAINT check_price_pr_hr CHECK (price_per_hr > 0);
+-- Adding integrity checks on customers table
+ALTER TABLE customers
+ADD CONSTRAINT check_dob CHECK (dob <= CURRENT_DATE);
+-- Adding integtity checks for memberships table
+ALTER TABLE memberships
+ADD CONSTRAINT check_expiry_date CHECK (expiry_date > active_date);
+-- Adding integrity checks for booking status in bookings table
+ALTER TABLE bookings
+ADD CONSTRAINT check_status CHECK (status IN ('confirmed', 'cancelled', 'awaiting'));
+-- adding integrity checks for amount paid in payments table 
+ALTER TABLE payments
+ADD CONSTRAINT check_amount_paid CHECK (amount_paid > 0);
+-- Adding integrity checks on payments table - ensure if payment was for memberships then membership_id is NOT NULL, if for bookings, booking_id is NOT NULL
+ALTER TABLE payments
+ADD CONSTRAINT check_payment_id_match CHECK (
+        (
+            payment_type = 'membership'
+            AND membership_id IS NOT NULL
+            AND booking_id IS NULL
+        )
+        OR (
+            payment_type = 'booking'
+            AND booking_id IS NOT NULL
+            AND membership_id is NULL
+        )
+    );
