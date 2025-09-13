@@ -277,3 +277,10 @@ ADD CONSTRAINT check_payment_id_match CHECK (
             AND membership_id is NULL
         )
     );
+-- Adding integrity checks to ensure first and last name is not empty 
+ALTER TABLE customers
+ADD CONSTRAINT check_first_name_not_empty CHECK (first_name <> ''),
+    ADD CONSTRAINT check_last_name_not_empty CHECK (last_name <> '');
+ALTER TABLE dog_walker
+ADD CONSTRAINT check_first_name_not_empty CHECK (first_name <> ''),
+    ADD CONSTRAINT check_last_name_not_empty CHECK (last_name <> '');
