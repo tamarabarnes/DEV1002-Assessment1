@@ -2,7 +2,7 @@
 CREATE TABLE services (
     service_id SERIAL PRIMARY KEY,
     service VARCHAR NOT NULL,
-    price_per_hr NUMERIC(6, 2) NOT NULL
+    price_per_hr NUMERIC(6, 2) NOT NULL CHECK (price_per_hr > 0)
 );
 -- input seed data in the service table
 INSERT INTO services (service, price_per_hr)
@@ -14,7 +14,7 @@ CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    dob DATE NOT NULL,
+    dob DATE NOT NULL CHECK (dob <= CURRENT_DATE),
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(15) NOT NULL UNIQUE,
     deleted_at TIMESTAMP DEFAULT NULL
@@ -235,10 +235,13 @@ WHERE booking_id = 4;
 SELECT *
 FROM customers
 ORDER BY first_name DESC;
--- CALCULATE DATA BASED ON VALUES FROM TABLES
+-- CALCULATE DATA BASED ON VALUES FROM TABLES - SUM
 SELECT SUM(amount_paid)
 FROM payments
 WHERE customer_id = 3;
+-- CALCULATING DATA BASED ON VALUES FROM TABLES - MIN
+SELECT MIN(amount_paid)
+FROM payments;
 -- FILTERING DATA ON A SPECIFIC VALUE
 SELECT customer_id,
     SUM(amount_paid) AS total_paid
