@@ -127,3 +127,21 @@ ADD CONSTRAINT check_payment_id_match CHECK (
     OR (payment_type = 'booking' AND booking_id IS NOT NULL AND membership_id IS NULL)
 );
 ```
+# Aggregating and Filtering Data with GROUP BY and HAVING 
+- This query calculates the total payments made by each customer. It filters results to only include customers who have paid more than $100 in total
+- The techniques used here are:
+-- Aggregate function (SUM)
+-- Grouping results (GROUP BY)
+-- Filtering aggregated data (HAVING)
+-- Multi-table JOIN with aliasing
+``` sql 
+SELECT customers.first_name,
+    customers.last_name,
+    SUM(payments.amount_paid) AS total_spent
+FROM customers
+    JOIN payments ON customers.customer_id = payments.customer_id
+GROUP BY customers.first_name,
+    customers.last_name
+HAVING SUM(payments.amount_paid) > 100
+ORDER BY total_spent DESC;
+```

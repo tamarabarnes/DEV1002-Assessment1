@@ -287,3 +287,13 @@ ADD CONSTRAINT check_first_name_not_empty CHECK (first_name <> ''),
 -- Adding integrity check to ensure customers email is in a valid email format 
 ALTER TABLE customers
 ADD CONSTRAINT check_email_format CHECK (email LIKE '%@%.%');
+-- Complex join table 
+SELECT customers.first_name,
+    customers.last_name,
+    SUM(payments.amount_paid) AS total_spent
+FROM customers
+    JOIN payments ON customers.customer_id = payments.customer_id
+GROUP BY customers.first_name,
+    customers.last_name
+HAVING SUM(payments.amount_paid) > 100
+ORDER BY total_spent DESC;
