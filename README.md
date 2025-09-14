@@ -99,3 +99,31 @@ FROM payments
 GROUP BY customer_id
 HAVING SUM(amount_paid) > 100;
 ```
+# Integrity Checks 
+Integrity Checks in the Database
+
+Integrity checks are rules applied to database tables to ensure that the data entered is valid, consistent, and accurate. They act as safeguards, preventing invalid or contradictory values from being stored. By enforcing these constraints, the database maintains data quality and ensures that the relationships between tables reflect the real-world model correctly.
+
+Integrity checks included in this database are:
+CHECK constraints – enforce conditions on column values (e.g., dates must be in the past, prices must be positive).
+UNIQUE constraints – prevent duplicate values in a column (e.g., emails, phone numbers).
+FOREIGN KEY constraints – ensure references between tables are valid.
+NOT NULL constraints – make sure essential fields are always filled.
+
+## example of integrity check - CHECK
+- - This ensures that a customer’s date of birth (dob) cannot be in the future.
+- It improves accuracy by preventing invalid dates like 2050-01-01.
+``` sql
+ALTER TABLE customers
+ADD CONSTRAINT check_dob CHECK (dob <= CURRENT_DATE);
+```
+- This ensures that if a payment is for a membership, the membership_id must be provided (and not a booking_id).
+- If the payment is for a booking, the opposite applies.
+- It guarantees that every payment record is tied to the correct type of service, preventing ambiguity or invalid data entry.
+``` sql 
+ALTER TABLE payments
+ADD CONSTRAINT check_payment_id_match CHECK (
+    (payment_type = 'membership' AND membership_id IS NOT NULL AND booking_id IS NULL)
+    OR (payment_type = 'booking' AND booking_id IS NOT NULL AND membership_id IS NULL)
+);
+```

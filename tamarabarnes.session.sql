@@ -284,3 +284,6 @@ ADD CONSTRAINT check_first_name_not_empty CHECK (first_name <> ''),
 ALTER TABLE dog_walker
 ADD CONSTRAINT check_first_name_not_empty CHECK (first_name <> ''),
     ADD CONSTRAINT check_last_name_not_empty CHECK (last_name <> '');
+-- Adding integrity check to ensure customers email is in a valid email format 
+ALTER TABLE customers
+ADD CONSTRAINT check_email_format CHECK (email LIKE '%@%.%');
